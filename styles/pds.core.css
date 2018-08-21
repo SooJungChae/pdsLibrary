@@ -1,0 +1,56 @@
+/**************************
+ 2018-05-11 ChaeSooJung
+ pdsWidget core css
+**************************/
+
+/*** common -- **************/
+table {
+  border-collapse: collapse;
+
+}
+th, td {
+  padding: 5px 8px;
+}
+th {
+  background-color: #f6f9fc;
+  color: #615faa;
+    border-top: 1px solid #fff;
+    border-bottom:1px solid #e3e8f3;
+}
+tr:nth-child(even) {
+  background-color: #f8fafe;
+}
+td {
+  border-bottom:1px solid #dedede;
+}
+td:empty {
+  height:32px;
+}
+/*** -- common **************/
+
+/*** pdsGrid -- **************/
+.pdsGridWrap {
+  /*overflow: scroll;*/
+}
+.pdsGrid {
+  width: 100%;
+}
+.pdsGrid tr th, .pdsGrid tr td{
+
+}
+.pdsGrid th {
+  height: 40px;
+}
+
+/*** -- pdsGrid **************/
+
+/*** pdsTextbox -- **************/
+.pdsTextbox {
+  /*border:1px solid black;*/
+  width: 100%;
+}
+
+.pds-gray{
+  background-color: #e4e7ec;
+    /*background-color: hsla(240,7%,81%,.15);*/
+}
