@@ -7,12 +7,16 @@
 </head>
 <body>
     <div class="pds-main-wrap">
+        <h2>PDS datetime library</h2>
+        <h4>Basic</h4>
+        <div id="dt"></div>
     </div>
-    <h2>PDS datetime library</h2>
-    <h4>Basic</h4>
+
     <script type="module">
         import pdsDatetime from './scripts/pdsDatetime.js';
-        pdsDatetime();
+
+        const dt = document.getElementById("dt");
+        pdsDatetime(dt);
     </script>
 </body>
 </html>
