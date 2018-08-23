@@ -54,3 +54,16 @@ td:empty {
   background-color: #e4e7ec;
     /*background-color: hsla(240,7%,81%,.15);*/
 }
+
+/*********************************
+        pds-datetime
+**********************************/
+.pds-datetime {
+    width: 100px;
+    padding: 6px 12px;
+}
+
+.pds-datetime-button {
+  /*font-size: 0;*/
+  /*text-indent: -999999em;*/
+}
