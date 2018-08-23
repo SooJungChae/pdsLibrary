@@ -5,12 +5,18 @@
  ----------------------------------*/
 const defaults = () => {
     styles: {
-
-    },
+        width: 150
+    }
     
 };
 
+const initialize = (obj) => {
+
+}
+
 export default (obj, attr) => {
+
     console.log(obj);
+    initialize(obj);
     console.log(attr);
 }
