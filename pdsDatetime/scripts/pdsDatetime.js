@@ -13,7 +13,7 @@ const initialize = (obj, styles) => {
     let p = document.getElementById(obj.id);
     let today = new Date();
     let dateFormat = today.getFullYear() + "-"
-                + today.getMonth() + "-"
+                + (today.getMonth() + 1) + "-"
                 + today.getDate();
 
     // create input element
@@ -57,21 +57,36 @@ const createCalendar = (parent) => {
     let startFullDate = new Date(today.getFullYear(), today.getMonth(), 1);
     let lastFullDate = new Date(today.getFullYear(), today.getMonth() + 1, 0);
     let lastDate = lastFullDate.getDate();
-    // 6 이면 다음줄 이동.
+
+    // previous month
+    let previousFullDate = new Date(today.getFullYear(), today.getMonth(), 0);
+    let previousLastDate = previousFullDate.getDate();
 
     let startDay = startFullDate.getDay();
-    let cnt = 1;
+    let cnt = 1, nextCnt = 1;
 
-    while (cnt <= lastDate) {
+    for (let week = 0; week < 6; week++) {
         tr = document.createElement("tr");
+
         for (let date = 0; date < 7; date++) {
             td = document.createElement("td");
             dateDiv = document.createElement("div");
             dateDiv.className = "pds-calendar-date";
             dateSpan = document.createElement("span");
 
-            if (startDay <= date) {
+            // previous month
+            if (startDay > date) {
+                dateSpan.className = "pds-text-disabled";
+                dateSpan.innerHTML = previousLastDate - startDay + 1 + date;
+            }
+            // current month
+            else if (startDay <= date && cnt <= lastDate) {
                 dateSpan.innerHTML = cnt++;
+            }
+            // next month
+            else {
+                dateSpan.className = "pds-text-disabled";
+                dateSpan.innerHTML = nextCnt++;
             }
 
             dateDiv.appendChild(dateSpan);

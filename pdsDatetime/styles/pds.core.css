@@ -66,6 +66,10 @@ td:empty {
 .pds-calendar-date {
   padding: 1em;
   text-align:center;
-  cursor: pointer;
 }
-
+.pds-text-disabled {
+    color: #cacaca;
+}
+.pds-calendar-date span {
+    cursor: default;
+}
