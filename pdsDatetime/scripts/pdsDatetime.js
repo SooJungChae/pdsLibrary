@@ -62,8 +62,9 @@ const createCalendar = (parent) => {
     let previousFullDate = new Date(today.getFullYear(), today.getMonth(), 0);
     let previousLastDate = previousFullDate.getDate();
 
+    let todayDate = today.getDate();
     let startDay = startFullDate.getDay();
-    let cnt = 1, nextCnt = 1;
+    let dateNumber = 1, nextMonthDate = 1;
 
     for (let week = 0; week < 6; week++) {
         tr = document.createElement("tr");
@@ -80,13 +81,16 @@ const createCalendar = (parent) => {
                 dateSpan.innerHTML = previousLastDate - startDay + 1 + date;
             }
             // current month
-            else if (startDay <= date && cnt <= lastDate) {
-                dateSpan.innerHTML = cnt++;
+            else if (startDay <= date && dateNumber <= lastDate) {
+                if (todayDate == dateNumber) {
+                    dateSpan.className += "pds-calendar-today";
+                }
+                dateSpan.innerHTML = dateNumber++;
             }
             // next month
             else {
                 dateSpan.className = "pds-text-disabled";
-                dateSpan.innerHTML = nextCnt++;
+                dateSpan.innerHTML = nextMonthDate++;
             }
 
             dateDiv.appendChild(dateSpan);

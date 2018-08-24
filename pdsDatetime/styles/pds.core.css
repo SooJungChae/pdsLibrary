@@ -73,3 +73,6 @@ td:empty {
 .pds-calendar-date span {
     cursor: default;
 }
+.pds-calendar-today {
+    color: red;
+}
