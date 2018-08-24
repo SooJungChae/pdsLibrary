@@ -6,14 +6,10 @@
 /*** common -- **************/
 table {
   border-collapse: collapse;
-
-}
-th, td {
-  padding: 5px 8px;
 }
 th {
-  background-color: #f6f9fc;
-  color: #615faa;
+    background-color: #f6f9fc;
+    color: #615faa;
     border-top: 1px solid #fff;
     border-bottom:1px solid #e3e8f3;
 }
@@ -24,7 +20,7 @@ td {
   border-bottom:1px solid #dedede;
 }
 td:empty {
-  height:32px;
+  /*height:32px;*/
 }
 /*** -- common **************/
 
@@ -67,3 +63,9 @@ td:empty {
   /*font-size: 0;*/
   /*text-indent: -999999em;*/
 }
+.pds-calendar-date {
+  padding: 1em;
+  text-align:center;
+  cursor: pointer;
+}
+

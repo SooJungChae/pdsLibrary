@@ -35,38 +35,57 @@ const initialize = (obj, styles) => {
     p.appendChild(newElement);
 }
 
-const createCalendar = (parentId) => {
+const createCalendar = (parent) => {
     let calendarWrap = document.createElement("div");
     let calendar = document.createElement("table");
 
-    let tbody = document.createElement("tbody");
-    let th = document.createElement("th");
-
     let thead = document.createElement("thead");
+    let tbody = document.createElement("tbody");
+    let tr, td, th, dateDiv, dateSpan;
 
-    for (let week = 0; week < 4; week++) {
-        let tr = document.createElement("tr");
-        for (let day = 0; day < 7; day++) {
-            let td = document.createElement("td");
-            td.text = day + 1;
+    // thead
+    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    days.forEach((day) => {
+        th = document.createElement("th");
+        th.innerHTML = day;
+        thead.appendChild(th);
+    });
+
+    // tbody
+    let today = new Date();
+    let startFullDate = new Date(today.getFullYear(), today.getMonth(), 1);
+    let lastFullDate = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+    let lastDate = lastFullDate.getDate();
+    // 6 이면 다음줄 이동.
+
+    let startDay = startFullDate.getDay();
+    let cnt = 1;
+
+    while (cnt <= lastDate) {
+        tr = document.createElement("tr");
+        for (let date = 0; date < 7; date++) {
+            td = document.createElement("td");
+            dateDiv = document.createElement("div");
+            dateDiv.className = "pds-calendar-date";
+            dateSpan = document.createElement("span");
+
+            if (startDay <= date) {
+                dateSpan.innerHTML = cnt++;
+            }
+
+            dateDiv.appendChild(dateSpan);
+            td.appendChild(dateDiv);
+            tr.appendChild(td);
         }
+        tbody.appendChild(tr);
+        startDay = 0;
     }
 
-
-
-    // 이번달을 캘린더로 만든다.
-// <table class="pds-dates">
-//         <thead>
-//         <tr>
-//         <th class="day"></th>
-//         </tr>
-//         </thead>
-//         <tbody>
-//         <tr>
-//         <td class="date"></td>
-//         </tr>
-//         </tbody>
-//         </table>
+    calendar.appendChild(thead);
+    calendar.appendChild(tbody);
+    calendarWrap.appendChild(calendar);
+    parent.appendChild(calendarWrap);
 }
 
 const createElement = (elementTag, elementId, html) => {
