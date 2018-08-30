@@ -9,6 +9,9 @@ const defaults = {
     }
 };
 
+const id = {
+    calendar: "pds-calendar"
+}
 const initialize = (obj, styles) => {
     let p = document.getElementById(obj.id);
     let today = new Date();
@@ -27,12 +30,51 @@ const initialize = (obj, styles) => {
     newElement = createElement("button", "pds-datetime-input", "select date");
     newElement.className = "pds-datetime-button";
     newElement.addEventListener("click", (e) => {
-        console.log('calenaer toggle');
-        createCalendar(p);
-        // innerHtml
+        let calendar = document.getElementById(id.calendar);
+        toggleClass(calendar, "nodisplay");
     });
 
     p.appendChild(newElement);
+    createCalendar(p);
+}
+
+const toggleClass = (obj, className) => {
+    if (obj.classList) {
+        obj.classList.toggle(className);
+    }
+    else {
+        // For IE9
+        let classes = obj.className.split(" ");
+        let i = classes.indexOf(className);
+
+        if (i >= 0) {
+            classes.splice(i, 1);
+        }
+        else {
+            classes.push(className);
+            obj.className = classes.join(" ");
+        }
+    }
+}
+
+const removeClass = (obj, className) => {
+    if (obj.className.indexOf(className)  != -1) {
+        obj.className = obj.className.replace(className, "");
+        return 1;
+    }
+    return -1;
+}
+
+const getChildren = (n, skipMe) => {
+    let r = [];
+    for ( ; n; n = n.nextSibling )
+        if ( n.nodeType == 1 && n != skipMe )
+            r.push(n);
+    return r;
+}
+
+const getSiblings = (n) => {
+    return getChildren(n.parentNode.firstChild, n);
 }
 
 const createCalendar = (parent) => {
@@ -73,6 +115,7 @@ const createCalendar = (parent) => {
             td = document.createElement("td");
             dateDiv = document.createElement("div");
             dateDiv.className = "pds-calendar-date";
+
             dateSpan = document.createElement("span");
 
             // previous month
@@ -83,7 +126,8 @@ const createCalendar = (parent) => {
             // current month
             else if (startDay <= date && dateNumber <= lastDate) {
                 if (todayDate == dateNumber) {
-                    dateSpan.className += "pds-calendar-today";
+                    dateDiv.className += " active";
+                    dateSpan.className += " pds-calendar-today";
                 }
                 dateSpan.innerHTML = dateNumber++;
             }
@@ -104,7 +148,26 @@ const createCalendar = (parent) => {
     calendar.appendChild(thead);
     calendar.appendChild(tbody);
     calendarWrap.appendChild(calendar);
+    calendarWrap.className = id.calendar + " nodisplay";
+    calendarWrap.id = id.calendar;
     parent.appendChild(calendarWrap);
+}
+
+const addEventListenerToControls = () => {
+    // when click date, toggle active class itself and others
+    let pdsCalendarDate = ".pds-calendar-date";
+    Array.prototype.forEach.call(document.querySelectorAll(pdsCalendarDate), (div) => {
+        div.addEventListener("click", function(e) {
+
+            e.currentTarget.className += " active";
+
+            document.querySelectorAll(pdsCalendarDate).forEach((date) => {
+                if (date.className.indexOf("active") != -1 && div != date) {
+                    date.className = date.className.replace("active", "");
+                };
+            });
+        });
+    });
 }
 
 const createElement = (elementTag, elementId, html) => {
@@ -128,4 +191,5 @@ export default (obj, attr) => {
     Object.assign(newStyle, attr);
 
     initialize(obj, newStyle);
+    addEventListenerToControls();
 }

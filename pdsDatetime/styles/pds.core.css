@@ -22,6 +22,9 @@ td {
 td:empty {
   /*height:32px;*/
 }
+.nodisplay {
+    display:none !important;
+}
 /*** -- common **************/
 
 /*** pdsGrid -- **************/
@@ -63,16 +66,34 @@ td:empty {
   /*font-size: 0;*/
   /*text-indent: -999999em;*/
 }
+.pds-calendar {
+
+}
+.pds-calendar th {
+    padding: 0.5em 0.3em;
+}
 .pds-calendar-date {
-  padding: 1em;
+  padding: 0.5em;
   text-align:center;
 }
-.pds-text-disabled {
-    color: #cacaca;
+.pds-calendar-date.active, .pds-calendar-date:hover{
+    /*border-radius: 20px;*/
+    border-radius: 50%;
+    color: #fff;
+    background-color:red;
+}
+.pds-calendar-date:hover span {
+    color:#fff;
 }
 .pds-calendar-date span {
     cursor: default;
 }
 .pds-calendar-today {
     color: red;
+}
+.pds-calendar-date.active .pds-calendar-today {
+    color: #fff;
+}
+.pds-text-disabled {
+    color: #cacaca;
 }
